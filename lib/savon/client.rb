@@ -31,6 +31,10 @@ module Savon
     def operation(operation_name)
       Operation.create(operation_name, @wsdl, @globals)
     end
+    
+    def get_request_xml operation_name, locals
+      Savon::Builder.new(operation_name, @wsdl, @globals, locals).pretty
+    end
 
     def call(operation_name, locals = {}, &block)
       operation(operation_name).call(locals, &block)
